@@ -1,5 +1,7 @@
 import pickle
 import socket
+import numpy as np
+import cv2
 import struct
 import threading
 from collections import Counter
@@ -106,6 +108,11 @@ def mask_detect_face_recog_server(server_socket, client_socket, client_address):
         
         # Now we have the frame and can begin predicting.
         frame = pickle.loads(frame_data)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        contrast = 1.25
+        brightness = 50
+        frame[:,:,2] = np.clip(contrast * frame[:,:,2] + brightness, 0, 255)
+        frame = cv2.cvtColor(frame, cv2.COLOR_HSV2BGR)
 
         # ValueError handling
         error_flag = 0

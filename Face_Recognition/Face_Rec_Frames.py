@@ -88,6 +88,7 @@ def update_database():
         name_face_encoding_dict = json.loads(name_face_encoding_json)
         known_face_encodings = list(name_face_encoding_dict.values())
         known_face_ids = list(name_face_encoding_dict.keys())
+    
 
 # From Detected_Faces, we return the most frequent Name.
 def most_probable_face_recognition(Detected_Faces):
@@ -108,7 +109,8 @@ def face_recognition_service(Frame_Mask_Detect_Pair):
 
     try:
         global known_face_encodings, known_face_ids
-        print(known_face_ids, known_face_encodings)
+        # print(known_face_ids, known_face_encodings)
+        
         # List of Detected Faces
         Detected_Faces = []
         face_locations = []
