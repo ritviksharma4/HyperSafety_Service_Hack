@@ -4,7 +4,8 @@ import struct
 import threading
 from collections import Counter
 from Covid_Mask_Detector.Frame_Face_Recognition import detect_face_mask
-from Face_Recognition.Face_Rec_Frames import face_recognition_service, initialise_database
+from Face_Recognition.Face_Rec_Frames import face_recognition_service, update_database
+from .HyperSafety_NodeJS_Event import connectNodejs, sio
 
 
 """
@@ -146,6 +147,8 @@ def mask_detect_face_recog_server(server_socket, client_socket, client_address):
             # frames for Face Recognition. 
             if (final_mask_detection == "No Mask"):
                 face_recog_reply = face_recognition_service(Frame_Mask_Detect_Pair)
+                if (face_recog_reply != "Not an Employee"):
+                    sio.emit("Update Warnings.", face_recog_reply)
                 msg_to_client = "Person Found Without Mask : " + face_recog_reply         
 
             
@@ -172,16 +175,17 @@ if __name__ == '__main__':
     try :
 
         # Upon Server restart, initialise existing employees' data.
-        initialise_database()
-        print("Database Initialized.")
+        update_database()
+        print("Database Ready.")
 
         server_socket = create_server_socket()
-        print("Mask Detection - Face Recognition Server is Up and Running...\n")
+        print("HyperSafety Server is Up and Running...\n")
 
+        connectNodejs()
         create_client_connection(server_socket)
 
     # Shutting the Mask Detection - Face Recognition Server Down.
     except KeyboardInterrupt:
 
         server_socket.close()
-        print("\n\nMask Detection - Face Recognition Server has Shutdown.\n")
+        print("\n\nHyperSafety Server has Shutdown.\n")
