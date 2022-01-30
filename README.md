@@ -1,38 +1,89 @@
-# HyperSafety_Service_Hack
+# HyperSafety ML Service
+## Mask-Detection & Face-Recognition Service for Safety in Work Places.
 
-Navigate to /home/xyz/github/Multi_Server_Video_Streaming/
+The HyperSafety ML Service of the [HyperSafety Frontend](https://github.com/HarshAmbasta/HyperSafety_Frontend_Hack) and the [HyperSafety Backend](https://github.com/ViVek6301/HyperSafety_Backend_Hack), an Employee Management Project in which images and details of Employees can be uploaded, which would then be used to detect whether or not Employees are wearing a mask in the Workplace. The [HyperSafety Frontend](https://github.com/HarshAmbasta/HyperSafety_Frontend_Hack) can then be used by the Higher-ups to check which Employees have been caught without a mask.
 
-  - Run Mask Server:
-      
-      ```
-      > python3 -m Multi_Server_Video_Streaming.Server_Mask
-      ```
+<img src = "Documentation_Images/HyperSafety.png" >
+
+# ⚠️ WARNING!
+
+### One of the dependencies (dlib) is NOT COMPATIBLE with Windows! Hence the Project cannot be run on Windows!
+
+# INSTALLATION
+
+### Install Torch
+
+    pip3 install torch torchvision torchaudio
+    
+### Install skvideo
+
+    pip3 install sk-video
+    
+### Install sklearn
+
+    pip3 install -U scikit-learn
+
+### Install pandas
+
+    pip3 install pandas
+    
+### Install opencv
+
+    pip3 install opencv-python
+    
+### Install pytorch-lightning 
+
+*(v1.2.10 IS RECOMMENDED)*
+    
+    pip3 install pytorch_lightning==1.2.10
+    
+### Install ffmpeg
+
+    sudo apt install ffmpeg
+    
+## Dependencies for Face Recognition
+
+### Install Cmake
+
+    sudo apt install cmake
+
+### Install dlib
+
+```
+git clone https://github.com/davisking/dlib.git
+``` 
   
-  - Run Face Recog Server:
-      ```
-      > python3 -m Multi_Server_Video_Streaming.Server_Face_Recog
-      ```
+```   
+cd dlib ; mkdir build ; cd build
+```   
+   
+```   
+cmake ..
+```   
+   
+```   
+sudo cmake --build . ; cd ..
+```
 
-  - Run Client:
-      ```
-      > python3 -m Multi_Server_Video_Streaming.Client
-      ```
-  
+```    
+python3 setup.py install
+```
+   
+### Install face recognition
 
-Navigate to /users/xyz/github/Multi_Server_Video_Streaming/
-
-  - Run Mask Server:
-      ```
-      > python -m Multi_Server_Video_Streaming.Server_Mask
-      ```
-
-  - Run Face Recog Server:
-      ```
-      > python -m Multi_Server_Video_Streaming.Server_Face_Recog
-      ```
+    pip3 install face_recognition
 
 
-  - Run Client:
-      ```
-      > python -m Multi_Server_Video_Streaming.Client
-      ```
+Then, clone the Git Repository.
+
+# Test our Project
+
+## Navigate to the root directory of the project. 
+
+## Run HyperSafety Server :
+
+     python3 -W ignore -m HyperSafety.HyperSafety_Server
+
+## Run HyperSafety Client :
+
+    python3 -m HyperSafety.HyperSafety_Client
